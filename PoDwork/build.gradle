@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        configSign {
+            keyAlias 'PoDkey'
+            keyPassword 'igr2001'
+            storeFile file('C:/projects/Igr/Andr/data/keystore_igr.jks')
+            storePassword 'igr2001'
+        }
+    }
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId 'com.igr.pod'
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        signingConfig signingConfigs.configSign
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.configSign
+        }
+        debug {
+            signingConfig signingConfigs.configSign
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    /*
+                            compile fileTree(include: ['*.jar'], dir: 'libs')
+                            androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+                                exclude group: 'com.android.support', module: 'support-annotations'
+                            })
+                        */
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:design:25.1.1'
+    /*
+                            compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+                            compile 'com.android.support:support-v4:25.1.1'
+                            compile 'com.android.support:support-vector-drawable:25.1.1'
+                            testCompile 'junit:junit:4.12'
+                        */
+    /*
+                            compile 'com.facebook.react:react-native:0.20.+'
+                            compile 'com.github.barteksc:android-pdf-viewer:2.3.0'
+                        */
+    compile 'com.github.barteksc:android-pdf-viewer:2.5.1'
+    /*
+                            provided 'org.androidannotations:androidannotations:4.0.0'
+                            compile 'org.androidannotations:androidannotations-api:4.0.0'
+                        */
+}

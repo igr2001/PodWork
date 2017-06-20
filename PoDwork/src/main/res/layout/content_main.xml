@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/content_main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingBottom="@dimen/activity_vertical_margin"
+android:paddingLeft="@dimen/activity_horizontal_margin"
+android:paddingRight="@dimen/activity_horizontal_margin"
+android:paddingTop="@dimen/activity_vertical_margin"
+tools:context="com.igr.pod.work.MainActivity"
+tools:showIn="@layout/activity_main">
+
+    android:weightSum="7"
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="?attr/actionBarSize"
+    >
+    <!--  -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/idsLocal"
+        />
+    <com.igr.pod.work.ListViewEx
+        android:id="@+id/idLocalList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:choiceMode="multipleChoice"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+        tools:listitem="@android:layout/simple_list_item_checked"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/idsServer"
+        />
+    <com.igr.pod.work.ListViewEx
+        android:id="@+id/idServerList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:choiceMode="multipleChoice"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+        tools:listitem="@android:layout/simple_list_item_checked"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="12"
+        >
+        <Button
+            android:id="@+id/idGetlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@android:drawable/btn_default_small"
+            style="@android:style/Widget.Button.Small"
+            android:onClick="onGetlist"
+            android:text="@string/idsGetlist"
+            />
+        <Button
+            android:id="@+id/idDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@android:drawable/btn_default_small"
+            style="@android:style/Widget.Button.Small"
+            android:onClick="onLoad"
+            android:text="@string/idsDownload"
+            />
+        <Button
+            android:id="@+id/idUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@android:drawable/btn_default_small"
+            style="@android:style/Widget.Button.Small"
+            android:onClick="onUpload"
+            android:text="@string/idsUpload"
+            />
+        <Button
+            android:id="@+id/idClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@android:drawable/btn_default_small"
+            style="@android:style/Widget.Button.Small"
+            android:onClick="onClear"
+            android:text="@string/idsClear"
+            />
+    </LinearLayout>
+    <!--
+        android:id="@+id/idButtons"
+        style="@android:style/Widget.Button.Small"
+    -->
+        <!--
+        </RelativeLayout>
+/*
+        <ImageButton
+            android:id="@+id/idClearButton"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/idsClear"
+            android:onClick="onClear"
+            android:text="@string/idsClear"
+            app:srcCompat="@android:drawable/ic_delete"
+            />
+*/
+
+        -->
+</LinearLayout>
+
+
