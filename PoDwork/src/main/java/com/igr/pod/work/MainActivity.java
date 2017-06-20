@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClear(View view) {
         ClearServerList();
     }
+
     // Private functions
     private void InitControls() {
         _btnGetlist  = (Button) findViewById(R.id.idGetlist);
