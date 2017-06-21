@@ -16,7 +16,7 @@
     <com.igr.pod.work.DrawViewEx
         android:background="@android:drawable/editbox_dropdown_light_frame"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="142dp"
         android:id="@+id/idSignature"/>
     <LinearLayout
         android:orientation="horizontal"

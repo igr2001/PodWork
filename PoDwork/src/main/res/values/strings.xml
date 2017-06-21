@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PoD-Work</string>
+    <string name="app_name">Lenmax Prove of delivery</string>
     <string name="idsSetting">Setting</string>
     <string name="idsLogin">Login</string>
     <string name="idsLogout">Logout</string>
