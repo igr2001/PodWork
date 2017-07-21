@@ -10,12 +10,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.igr.pod.work.R;
 
@@ -108,6 +106,7 @@ public class LoginDlgActivity extends AppCompatActivity {
     }
 
     private void SaveSetting(int resultCode) {
+        Intent intent = new Intent();
         if ( resultCode == RESULT_OK ) {
             SharedPreferences sPref = getSharedPreferences(MainActivity.PREF_NAME, MODE_PRIVATE);
             SharedPreferences.Editor ed = sPref.edit();
@@ -117,10 +116,13 @@ public class LoginDlgActivity extends AppCompatActivity {
                 ed.putString(MainActivity.COMPANY, mCompany);
             ed.commit();
         } else {
-            Toast.makeText(this, "Login error:\r\n" + mError, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, sError, Toast.LENGTH_LONG).show();
+            if (mError!=null && !mError.isEmpty()) {
+                String sError = "Login error:\r\n" + mError;
+                intent.putExtra(MainActivity.LOGIN_ERROR, sError);
+            }
         }
-        Intent intentMain = new Intent();
-        setResult(resultCode, intentMain);
+        setResult(resultCode, intent);
     }
 
     public void login(String sUrl) {
@@ -148,16 +150,16 @@ public class LoginDlgActivity extends AppCompatActivity {
                     lUrlConnection.setDoInput(true);
                     lUrlConnection.setDoOutput(true);
                     lUrlConnection.setConnectTimeout(5000);
+                    lUrlConnection.setReadTimeout(5000);
                     lUrlConnection.connect();
-                    int responseCode = lUrlConnection.getResponseCode();
-                    if(responseCode == HttpURLConnection.HTTP_OK){
+                    int mResponseCode = lUrlConnection.getResponseCode();
+                    if(mResponseCode == HttpURLConnection.HTTP_OK){
                         InputStream lInputStream = lUrlConnection.getInputStream();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(lInputStream, "UTF-8"), 8);
-                        String line;// = lUrlConnection.getResponseMessage();
+                        String line;
                         while ((line = reader.readLine()) != null)
                             mResult += line;
                         lInputStream.close();
-//                        if ( !mResult.contentEquals(getResources().getString(R.string.idsPhpSuccess)) )
                         if ( !mResult.endsWith(getResources().getString(R.string.idsPhpSuccess)) )
                         {
                             mError = mResult;
@@ -166,7 +168,8 @@ public class LoginDlgActivity extends AppCompatActivity {
                         return mResult;
                     } else
                     {
-                        mError = lUrlConnection.getResponseMessage();
+                        mError = String.format("ResponseCode=%d(%s)",
+                                mResponseCode, lUrlConnection.getResponseMessage());
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();

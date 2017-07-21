@@ -53,6 +53,7 @@ public class DrawViewEx extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+//        if ( MainActivity.mSignViewOnly ) return;
         if ( mBitmap==null ) {
             mBitmap = Bitmap.createBitmap(w-BORDER_WIDTH-BORDER_WIDTH, h-BORDER_WIDTH-BORDER_WIDTH, Bitmap.Config.ARGB_8888);
             mCanvas = new Canvas(mBitmap);
@@ -76,6 +77,8 @@ public class DrawViewEx extends View {
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if ( MainActivity.mSignViewOnly )
+            return false;
         float mx = event.getX();
         float my = event.getY();
         switch (event.getAction()) {
@@ -111,11 +114,13 @@ public class DrawViewEx extends View {
         return true;
     }
     public boolean SaveImage(String sFileName) {
-        File file = new File(sFileName);
+        File mFile = new File(sFileName);
         try {
+            mFile.createNewFile();
+            mFile.setReadable(true, false);
             FileOutputStream fos = null;
             try {
-                fos = new FileOutputStream(file);
+                fos = new FileOutputStream(mFile);
                 mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             } finally {
                 if (fos != null) fos.close();

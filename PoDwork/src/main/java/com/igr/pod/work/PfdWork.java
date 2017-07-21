@@ -38,6 +38,8 @@ public class PfdWork {
     private List<String> mList = new ArrayList<String>();
     private String mResult = new String();
     private Integer mResponseCode = 0;
+    private String mUserData = null;
+    private String mMailTo = null;
     // Settings variables
     private String mHostName;
     private String mServerName;
@@ -53,33 +55,12 @@ public class PfdWork {
         LoadSetting(MainActivity.TS_ALL);
     }
     // Public functions
-    public Exception getError() {
-        return mError;
-    }
-    public void LoadSetting(int type)
-    {
-        if ( mContext==null )
-            return;
-        SharedPreferences sPref = mContext.getSharedPreferences(MainActivity.PREF_NAME, mContext.MODE_PRIVATE);
-        if ( (type&MainActivity.TS_LOGIN) > 0 )  {
-            mUserName = sPref.getString(MainActivity.USER_NAME, "sa");
-            mPassword = sPref.getString(MainActivity.PASSWORD, "igr");
-            mCompany = sPref.getString(MainActivity.COMPANY, "FVJ");
-        }
-        if ( (type&MainActivity.TS_SETTING) > 0 ) {
-            mHostName = sPref.getString(MainActivity.HOST_NAME, "http://10.0.2.2");
-            mServerName = sPref.getString(MainActivity.SRV_NAME, ".\\SQLEXPRESS");
-            mDataBase = sPref.getString(MainActivity.DB_NAME, "lox");
-            mCheckUser = sPref.getBoolean(MainActivity.CHECK_USER, false);
-            mCheckCompany = sPref.getBoolean(MainActivity.CHECK_COMPANY, false);
-        }
-    }
-
     public File downloadFile(String sUrl, String sFilePath, String sFileNameTmp, Handler lHandler) {
         mError = null;
         mFileName = sFileNameTmp;
         mHandler  = lHandler;
         mFile = null;
+        mResponseCode = 0;
 
         final ProgressDialog progressDialog = new ProgressDialog(mContext);
         AsyncTask<String, Integer, File> mProgressTask = new AsyncTask<String, Integer, File>() {
@@ -94,18 +75,22 @@ public class PfdWork {
                     HttpURLConnection lUrlConnection = (HttpURLConnection) lURL.openConnection();
                     lUrlConnection.setRequestMethod("GET");
                     lUrlConnection.setDoInput(true);
+                    lUrlConnection.setConnectTimeout(5000);
+                    lUrlConnection.setReadTimeout(5000);
                     lUrlConnection.connect();
                     mResponseCode = lUrlConnection.getResponseCode();
                     if(mResponseCode != HttpURLConnection.HTTP_OK) {
-                        mError = new Exception( String.format("ResponseCode = %d", mResponseCode) );
+                        mError = new Exception(String.format("ResponseCode=%d(%s)",
+                                mResponseCode, lUrlConnection.getResponseMessage()));
                         mFile = null;
                         return mFile;
                     }
                     InputStream lInputStream = lUrlConnection.getInputStream();
                     mFileName = retriveFileName(sUrl, lUrlConnection, sFileNameTmp);
                     mFile = new File(sFilePath, mFileName);
-                    if (mFile != null)
-                        mFile.createNewFile();
+//                  if (mFile != null)
+                    mFile.createNewFile();
+                    mFile.setReadable(true, false);
                     FileOutputStream lOutputStream = new FileOutputStream(mFile);
 
                     int totalSize = lUrlConnection.getContentLength();
@@ -174,9 +159,11 @@ public class PfdWork {
         return mFile;
 */
     }
-    public Integer uploadFile(String sUrl, String sFileName, Handler lHandler) {
+    public Integer uploadFile(String sUrl, String sFileName, String sUsedData, String sMailTo, Handler lHandler) {
         mError = null;
         mFileName = sFileName;
+        mUserData = sUsedData;
+        mMailTo = sMailTo;
         mHandler  = lHandler;
 
         mResponseCode = 0;
@@ -191,12 +178,23 @@ public class PfdWork {
                 String boundary = "*****";
 
                 String sUrl = modifyUrl(params[0]);
+                if ( mUserData!=null && !mUserData.isEmpty() ) {
+                    String sUserData = mUserData.replace(" ", "%20");
+                    sUrl += "&userdata=" + sUserData;
+                }
+                if ( mMailTo!=null && !mMailTo.isEmpty() ) {
+                    String sMailTo = mMailTo.replace(" ", "%20");
+                    sUrl += "&mailto=" + sMailTo;
+                }
+
                 String sFileName = params[1];
                 try {
                     URL lURL = new URL(sUrl);
                     HttpURLConnection lUrlConnection = (HttpURLConnection) lURL.openConnection();
                     lUrlConnection.setDoInput(true); // Allow Inputs
                     lUrlConnection.setDoOutput(true); // Allow Outputs
+                    lUrlConnection.setConnectTimeout(5000);
+                    lUrlConnection.setReadTimeout(5000);
                     lUrlConnection.setUseCaches(false); // Don't use a Cached Copy
                     lUrlConnection.setRequestMethod("POST");
                     lUrlConnection.setRequestProperty("Connection", "Keep-Alive");
@@ -227,8 +225,7 @@ public class PfdWork {
                     // Responses from the server (code and message)
                     mResponseCode = lUrlConnection.getResponseCode();
                     String sResponseMessage = lUrlConnection.getResponseMessage();
-                    if ( mResponseCode == HttpURLConnection.HTTP_OK )
-                    {
+                    if ( mResponseCode == HttpURLConnection.HTTP_OK ) {
                         InputStream lInputStreamUrl = lUrlConnection.getInputStream();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(lInputStreamUrl, "UTF-8"), 8);
                         String line;
@@ -241,7 +238,8 @@ public class PfdWork {
                             mResult = "";
                         }
                     } else {
-                        mError = new Exception(String.format("ResponseCode = %d", mResponseCode));
+                        mError = new Exception(String.format("ResponseCode=%d(%s)",
+                                mResponseCode, lUrlConnection.getResponseMessage()));
                     }
                     lInputStream.close();
                     lOutputStream.flush();
@@ -321,15 +319,20 @@ public class PfdWork {
                     lUrlConnection.setRequestMethod("GET"); // lUrlConnection.setRequestMethod("POST");
                     lUrlConnection.setDoInput(true);
                     lUrlConnection.setDoOutput(true);
+                    lUrlConnection.setConnectTimeout(5000);
+                    lUrlConnection.setReadTimeout(5000);
                     lUrlConnection.connect();
-                    int responseCode = lUrlConnection.getResponseCode();
-                    if(responseCode == HttpURLConnection.HTTP_OK){
+                    mResponseCode = lUrlConnection.getResponseCode();
+                    if(mResponseCode == HttpURLConnection.HTTP_OK){
                         InputStream lInputStream = lUrlConnection.getInputStream();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(lInputStream, "UTF-8"), 8);
                         String line = null;
                         while ((line = reader.readLine()) != null)
                             mList.add(line);
                         lInputStream.close();
+                    } else {
+                        mError = new Exception(String.format("ResponseCode=%d(%s)",
+                                mResponseCode, lUrlConnection.getResponseMessage()));
                     }
                     return mList;
                 } catch (IOException e) {
@@ -365,6 +368,24 @@ public class PfdWork {
             mError = e;
             mList.clear();
             return mList;
+        }
+    }
+    public void LoadSetting(int type)
+    {
+        if ( mContext==null )
+            return;
+        SharedPreferences sPref = mContext.getSharedPreferences(MainActivity.PREF_NAME, mContext.MODE_PRIVATE);
+        if ( (type&MainActivity.TS_LOGIN) > 0 )  {
+            mUserName = sPref.getString(MainActivity.USER_NAME, "sa");
+            mPassword = sPref.getString(MainActivity.PASSWORD, "igr");
+            mCompany = sPref.getString(MainActivity.COMPANY, "FVJ");
+        }
+        if ( (type&MainActivity.TS_SETTING) > 0 ) {
+            mHostName = sPref.getString(MainActivity.HOST_NAME, "http://10.0.2.2");
+            mServerName = sPref.getString(MainActivity.SRV_NAME, ".\\SQLEXPRESS");
+            mDataBase = sPref.getString(MainActivity.DB_NAME, "lox");
+            mCheckUser = sPref.getBoolean(MainActivity.CHECK_USER, false);
+            mCheckCompany = sPref.getBoolean(MainActivity.CHECK_COMPANY, false);
         }
     }
     // Private functions

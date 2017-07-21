@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/content_main"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:paddingBottom="@dimen/activity_vertical_margin"
-android:paddingLeft="@dimen/activity_horizontal_margin"
-android:paddingRight="@dimen/activity_horizontal_margin"
-android:paddingTop="@dimen/activity_vertical_margin"
-tools:context="com.igr.pod.work.MainActivity"
-tools:showIn="@layout/activity_main">
-
-    android:weightSum="7"
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,14 +9,24 @@ tools:showIn="@layout/activity_main">
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="?attr/actionBarSize"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     >
-    <!--  -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/idsLocal"
-        />
+        android:orientation="horizontal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/idsLocal"
+            />
+    </LinearLayout>
     <com.igr.pod.work.ListViewEx
         android:id="@+id/idLocalList"
         android:layout_width="match_parent"
@@ -40,12 +36,34 @@ tools:showIn="@layout/activity_main">
         android:background="@android:drawable/editbox_dropdown_light_frame"
         tools:listitem="@android:layout/simple_list_item_checked"
         />
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/idsServer"
-        />
+        android:orientation="horizontal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="4dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/idsServer"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="@string/idsFilter"
+            />
+        <EditText
+            android:id="@+id/idEditFilter"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/editbox_background_normal"
+            />
+    </LinearLayout>
     <com.igr.pod.work.ListViewEx
         android:id="@+id/idServerList"
         android:layout_width="match_parent"
@@ -59,13 +77,13 @@ tools:showIn="@layout/activity_main">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="12"
+        android:weightSum="9"
         >
         <Button
             android:id="@+id/idGetlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:background="@android:drawable/btn_default_small"
             style="@android:style/Widget.Button.Small"
             android:onClick="onGetlist"
@@ -75,7 +93,7 @@ tools:showIn="@layout/activity_main">
             android:id="@+id/idDownload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:background="@android:drawable/btn_default_small"
             style="@android:style/Widget.Button.Small"
             android:onClick="onLoad"
@@ -85,17 +103,27 @@ tools:showIn="@layout/activity_main">
             android:id="@+id/idUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:background="@android:drawable/btn_default_small"
             style="@android:style/Widget.Button.Small"
             android:onClick="onUpload"
             android:text="@string/idsUpload"
             />
         <Button
+            android:id="@+id/idMailto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@android:drawable/btn_default_small"
+            style="@android:style/Widget.Button.Small"
+            android:onClick="onMailto"
+            android:text="@string/idsMailto"
+            />
+        <Button
             android:id="@+id/idClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:background="@android:drawable/btn_default_small"
             style="@android:style/Widget.Button.Small"
             android:onClick="onClear"
@@ -121,7 +149,9 @@ tools:showIn="@layout/activity_main">
             app:srcCompat="@android:drawable/ic_delete"
             />
 */
-
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:drawable/title_bar"
         -->
 </LinearLayout>
 

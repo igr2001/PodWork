@@ -17,7 +17,7 @@ import java.io.File;
 
 public class ListViewEx extends  ListView
 {
-    private ArrayAdapter<File> mAdapterView = null;
+    public ArrayAdapter<File> mAdapterView = null;
     private AdapterView.OnItemClickListener mListener = null;
 
     public ListViewEx(Context context) {

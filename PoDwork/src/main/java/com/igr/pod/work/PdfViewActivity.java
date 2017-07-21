@@ -1,10 +1,13 @@
 package com.igr.pod.work;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.EditText;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
@@ -14,14 +17,20 @@ import com.igr.pod.work.R;
 
 import java.io.File;
 
+
 public class PdfViewActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener
 {
     // Controls
     private PDFView _rlPdfView;
     private DrawViewEx _dvSignatureView;
+    private EditText _etUserData;
+    private Button _bOk;
+    private Button _bCancel;
+    private Button _bClear;
 
     private String mFileName = null;
     private int mPageCurrent = 0;
+    private String mUserData = new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +38,6 @@ public class PdfViewActivity extends AppCompatActivity implements OnPageChangeLi
 
         LoadSetting();
         InitControls();
-
         OpenPdf();
     }
     @Override
@@ -43,25 +51,37 @@ public class PdfViewActivity extends AppCompatActivity implements OnPageChangeLi
     }
     // Private functions
     private void LoadSetting() {
-        mFileName = getIntent().getStringExtra(MainActivity.PDF_FILENAME);
+        Intent intent = getIntent();
+        mFileName = intent.getStringExtra(MainActivity.PDF_FILENAME);
+        mUserData = intent.getStringExtra(MainActivity.PDF_USERDATA);
     }
     private void InitControls()
     {
         _rlPdfView = (PDFView) findViewById(R.id.idPdfView);
         _dvSignatureView = (DrawViewEx) findViewById(R.id.idSignature);
-        findViewById(R.id.idPdfOK).setOnClickListener(new View.OnClickListener() {
+        _etUserData = (EditText) findViewById(R.id.idEditUserData);
+        _bOk = (Button)findViewById(R.id.idPdfOK);
+        _bCancel = (Button)findViewById(R.id.idPdfCancel);
+        _bClear = (Button)findViewById(R.id.idClear);
+        if ( MainActivity.mSignViewOnly ) {
+//            _etUserData.setInputType(InputType.TYPE_NULL);
+            _etUserData.setEnabled(false);
+            _bOk.setEnabled(false);
+            _bClear.setEnabled(false);
+        }
+        _bOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ClosePdf(RESULT_OK);
             }
         });
-        findViewById(R.id.idPdfCancel).setOnClickListener(new View.OnClickListener() {
+        _bCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ClosePdf(RESULT_CANCELED);
             }
         });
-        findViewById(R.id.idClear).setOnClickListener(new View.OnClickListener() {
+        _bClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 _dvSignatureView.Clear();
@@ -77,27 +97,24 @@ public class PdfViewActivity extends AppCompatActivity implements OnPageChangeLi
             .enableAnnotationRendering(true)
             .scrollHandle(new DefaultScrollHandle(this))
             .load();
-
         String sSignName =  MainActivity.GetSignName(mFileName);
         _dvSignatureView.LoadImage(sSignName);
+        _etUserData.setText(mUserData);
         return true;
     }
     private void ClosePdf(int resultCode) {
         if ( _dvSignatureView.isEmpty() )
             resultCode = RESULT_FIRST_USER;
-        setResult(resultCode, getIntent());
-
-        String sSignName = MainActivity.GetSignName(mFileName);
-        if ( resultCode==RESULT_OK)
+        Intent intent = getIntent();
+        setResult(resultCode, intent);
+        if ( resultCode==RESULT_OK) {
+            String sSignName = MainActivity.GetSignName(mFileName);
             _dvSignatureView.SaveImage(sSignName);
+            mUserData = _etUserData.getText().toString();
+            intent.putExtra(MainActivity.PDF_USERDATA, mUserData);
+        }
         finish();
     }
     private void updateUi() {
     }
-/*
-    private void ShowPage(int index) {
-        _rlPdfView.jumpTo(index);
-        updateUi();
-    }
-*/
 }

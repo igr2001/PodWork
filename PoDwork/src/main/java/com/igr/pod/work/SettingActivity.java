@@ -16,9 +16,7 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         LoadSetting();
-
-        findViewById(R.id.idCheckEditSign).setVisibility(View.INVISIBLE); // TMP hide
-
+//        findViewById(R.id.idCheckEditSign).setVisibility(View.INVISIBLE); // TMP hide
         findViewById(R.id.idBtnOK).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +40,7 @@ public class SettingActivity extends AppCompatActivity {
         ((EditText) findViewById(R.id.idEditDataBase)).setText(sPref.getString(MainActivity.DB_NAME,  "lox") );
         ((CheckBox) findViewById(R.id.idCheckUser)).setChecked(sPref.getBoolean(MainActivity.CHECK_USER, false) );
         ((CheckBox) findViewById(R.id.idCheckCompany)).setChecked(sPref.getBoolean(MainActivity.CHECK_COMPANY, false) );
-        ((CheckBox) findViewById(R.id.idCheckEditSign)).setChecked(sPref.getBoolean(MainActivity.CHECK_EDITSIGN, false) );
+        ((CheckBox) findViewById(R.id.idAddUserName)).setChecked(sPref.getBoolean(MainActivity.CHECK_ADDUSER, false) );
     }
 
     public void SaveSetting() {
@@ -53,7 +51,7 @@ public class SettingActivity extends AppCompatActivity {
         ed.putString(MainActivity.DB_NAME,   ((EditText) findViewById(R.id.idEditDataBase)).getText().toString() );
         ed.putBoolean(MainActivity.CHECK_USER, ((CheckBox) findViewById(R.id.idCheckUser)).isChecked() );
         ed.putBoolean(MainActivity.CHECK_COMPANY, ((CheckBox) findViewById(R.id.idCheckCompany)).isChecked() );
-        ed.putBoolean(MainActivity.CHECK_EDITSIGN, ((CheckBox) findViewById(R.id.idCheckEditSign)).isChecked() );
+        ed.putBoolean(MainActivity.CHECK_ADDUSER, ((CheckBox) findViewById(R.id.idAddUserName)).isChecked() );
         ed.commit();
     }
 

@@ -5,23 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.igr.pod.work.PdfViewActivity">
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context="com.igr.pod.work.PdfViewActivity"
+    >
     <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/idPdfView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@android:drawable/editbox_dropdown_light_frame"
         android:layout_weight="1"
-        android:id="@+id/idPdfView">
-    </com.github.barteksc.pdfviewer.PDFView>
-    <com.igr.pod.work.DrawViewEx
         android:background="@android:drawable/editbox_dropdown_light_frame"
+        />
+    <com.igr.pod.work.DrawViewEx
+        android:id="@+id/idSignature"
         android:layout_width="match_parent"
-        android:layout_height="142dp"
-        android:id="@+id/idSignature"/>
+        android:layout_height="150dp"
+        android:background="@android:drawable/alert_light_frame"
+        />
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="@string/idsUserData"
+            />
+        <EditText
+            android:id="@+id/idEditUserData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/editbox_background_normal"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:weightSum="9"
         >
         <Button
@@ -44,12 +68,16 @@
             />
         <Button
             android:id="@+id/idClear"
+            style="@android:style/Widget.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:background="@android:drawable/btn_default_small"
-            style="@android:style/Widget.Button.Small"
-            android:text="@string/idsClear"
-            />
+            android:text="@string/idsClear" />
     </LinearLayout>
 </LinearLayout>
+    <!--
+                android:background="@android:drawable/editbox_background_normal"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+    </com.github.barteksc.pdfviewer.PDFView>
+    -->

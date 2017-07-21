@@ -4,8 +4,8 @@
     android:id="@+id/activity_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -19,6 +19,7 @@
         android:id="@+id/idEditHost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background_normal"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -30,6 +31,7 @@
         android:id="@+id/idEditServerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background_normal"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -41,6 +43,7 @@
         android:id="@+id/idEditDataBase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background_normal"
          />
     <CheckBox
         android:id="@+id/idCheckUser"
@@ -57,12 +60,13 @@
         android:text="@string/idsCheckCompany"
         />
     <CheckBox
-        android:id="@+id/idCheckEditSign"
+        android:id="@+id/idAddUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="false"
-        android:text="@string/idsCheckSigned"
+        android:text="@string/idsAddUserName"
         />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
