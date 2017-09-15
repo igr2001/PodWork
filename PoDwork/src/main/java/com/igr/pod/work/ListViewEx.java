@@ -18,8 +18,18 @@ import java.io.File;
 public class ListViewEx extends  ListView
 {
     public ArrayAdapter<File> mAdapterView = null;
-    private AdapterView.OnItemClickListener mListener = null;
-
+/*
+    // Callback
+    private OnListListener mOnListListener = null;
+    public interface OnListListener{
+        public void OnItemClick(int position);
+        public void OnItemLongClick(int position);
+        public void OnItemDelete(int position);
+    }
+    public void setOnListListener(OnListListener listListener){
+        mOnListListener = listListener;
+    }
+*/
     public ListViewEx(Context context) {
         super(context);
         InitList(context);
@@ -32,7 +42,7 @@ public class ListViewEx extends  ListView
         super(context, attrs, defStyle);
         InitList(context);
     }
-// Public functions
+    // Public functions
     public boolean AddItem(File lFile, boolean bChecked)
     {
         boolean bRet = false;
@@ -60,7 +70,13 @@ public class ListViewEx extends  ListView
             mAdapterView.clear();
         return position;
     }
-// Private functions
+    public int getPositionItem(File lFile)
+    {
+        if ( lFile == null )
+            return -1;
+        return mAdapterView.getPosition(lFile);
+    }
+    // Private functions
     private void InitList(Context context) {
         mAdapterView = new ArrayAdapter<File>(context, android.R.layout.simple_list_item_checked)
         {
@@ -74,14 +90,15 @@ public class ListViewEx extends  ListView
         };
         setAdapter(mAdapterView);
 /*
-        mListener = new OnItemClickListener()
-        {
+        setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                String sClassName = parent.getClass().getName();
+                ListViewEx mListViewEx = (ListViewEx)parent;
+                if ( mListViewEx.mOnListListener!=null )
+                    mListViewEx.mOnListListener.OnItemClick(position);
             }
-        };
-        setOnItemClickListener(mListener);
- */
+        });
+*/
     }
 }

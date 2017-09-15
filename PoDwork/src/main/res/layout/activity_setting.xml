@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -66,7 +65,13 @@
         android:checked="false"
         android:text="@string/idsAddUserName"
         />
-
+    <CheckBox
+        android:id="@+id/idCheckScan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/idsCheckScan"
+        />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -96,3 +101,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 </RelativeLayout>
     -->
+    <!-- android:id="@+id/activity_setting" -->

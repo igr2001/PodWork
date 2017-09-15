@@ -53,7 +53,6 @@ public class DrawViewEx extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-//        if ( MainActivity.mSignViewOnly ) return;
         if ( mBitmap==null ) {
             mBitmap = Bitmap.createBitmap(w-BORDER_WIDTH-BORDER_WIDTH, h-BORDER_WIDTH-BORDER_WIDTH, Bitmap.Config.ARGB_8888);
             mCanvas = new Canvas(mBitmap);

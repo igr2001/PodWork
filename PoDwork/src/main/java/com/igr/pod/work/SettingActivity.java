@@ -16,7 +16,6 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         LoadSetting();
-//        findViewById(R.id.idCheckEditSign).setVisibility(View.INVISIBLE); // TMP hide
         findViewById(R.id.idBtnOK).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +40,7 @@ public class SettingActivity extends AppCompatActivity {
         ((CheckBox) findViewById(R.id.idCheckUser)).setChecked(sPref.getBoolean(MainActivity.CHECK_USER, false) );
         ((CheckBox) findViewById(R.id.idCheckCompany)).setChecked(sPref.getBoolean(MainActivity.CHECK_COMPANY, false) );
         ((CheckBox) findViewById(R.id.idAddUserName)).setChecked(sPref.getBoolean(MainActivity.CHECK_ADDUSER, false) );
+        ((CheckBox) findViewById(R.id.idCheckScan)).setChecked(sPref.getBoolean(MainActivity.CHECK_SCAN, false) );
     }
 
     public void SaveSetting() {
@@ -52,6 +52,7 @@ public class SettingActivity extends AppCompatActivity {
         ed.putBoolean(MainActivity.CHECK_USER, ((CheckBox) findViewById(R.id.idCheckUser)).isChecked() );
         ed.putBoolean(MainActivity.CHECK_COMPANY, ((CheckBox) findViewById(R.id.idCheckCompany)).isChecked() );
         ed.putBoolean(MainActivity.CHECK_ADDUSER, ((CheckBox) findViewById(R.id.idAddUserName)).isChecked() );
+        ed.putBoolean(MainActivity.CHECK_SCAN, ((CheckBox) findViewById(R.id.idCheckScan)).isChecked() );
         ed.commit();
     }
 

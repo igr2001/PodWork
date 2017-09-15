@@ -18,7 +18,7 @@
     <string name="idsUserName">User name</string>
     <string name="idsPassword">Password</string>
     <string name="idsCompany">Company name</string>
-    <string name="idsPrevious">Prev</string>
+    <string name="idsPrev">Prev</string>
     <string name="idsNext">Next</string>
     <string name="idsYes">Yes</string>
     <string name="idsNo">No</string>
@@ -35,6 +35,22 @@
     <string name="idsFilter">Search</string>
     <string name="idsEnterEmail">Enter your email address</string>
     <string name="idsDisonnect">disconnected</string>
+    <string name="idsScan">Load SSCC</string>
+    <string name="idsScanNext">Un-load SSCC</string>
+    <string name="idsContine">Scan another?</string>
+    <string name="idsCheckScan">Allow SSCC scan</string>
+    <string name="idsRemoveScan">Remove item?</string>
+
+    <string name="idsUncheckUnload">Checkmark is removed.\nScan another?</string>
+    <string name="idsErrorUnload">Barcode is not found.\nScan another?</string>
+
     <string name="idsExtPdf">.pdf</string>
     <string name="idsExtPng">.png</string>
+    <string name="idsExtTxt">.txt</string>
+
+    <string-array name="local_array">
+        <item>Remove Document</item>
+        <item>Scan Shipping Container</item>
+    </string-array>
+
 </resources>
