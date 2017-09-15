@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "C:\\Projects\\igr\\MyApplication\\android\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v16\\values-v16.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 65,
+                    "endOffset": 116
+                },
+                "from": {
+                    "file": "C:\\Users\\igr\\.android\\build-cache\\b3bfb59816cc7c3188c61258bde4ff79e0d5f48a\\output\\res\\values-v16\\values-v16.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 65,
+                        "endOffset": 116
+                    }
+                }
+            }
+        ]
+    }
+]

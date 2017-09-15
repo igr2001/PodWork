@@ -1,0 +1,268 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:17:1-144:12
+	package
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:18:11-52
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:19:11-38
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+	android:versionCode
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:20:11-36
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:17:11-69
+	android:installLocation
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:21:11-41
+uses-permission#android.permission.CAMERA
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:22:3-62
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:22:20-60
+uses-permission#android.permission.INTERNET
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:23:3-64
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:23:20-62
+uses-permission#android.permission.VIBRATE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:24:3-63
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:24:20-61
+uses-permission#android.permission.FLASHLIGHT
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:25:3-66
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:25:20-64
+uses-permission#android.permission.READ_CONTACTS
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:26:3-69
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:26:20-67
+uses-permission#com.android.browser.permission.READ_HISTORY_BOOKMARKS
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:28:3-90
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:28:20-88
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:29:3-78
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:29:20-76
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:30:3-73
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:30:20-71
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:31:3-73
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:31:20-71
+uses-sdk
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:33:3-71
+MERGED from [com.android.support:design:25.1.1] C:\Users\igr\.android\build-cache\28ee028416becd736d93583e501c1773945a85d5\output\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:25.1.1] C:\Users\igr\.android\build-cache\b3bfb59816cc7c3188c61258bde4ff79e0d5f48a\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] C:\Users\igr\.android\build-cache\6fdd7e871e9dec696988bb4600267ffed42e0451\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.1.1] C:\Users\igr\.android\build-cache\595d177e3347b6b35687116955510459e68e8352\output\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:recyclerview-v7:25.1.1] C:\Users\igr\.android\build-cache\1ecf58b944645bed2bb4b3d3341894b664915c35\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.1.1] C:\Users\igr\.android\build-cache\61574c0fab69a12064d19dc4ef7c76043e625aaa\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:25.1.1] C:\Users\igr\.android\build-cache\1a510cfdf58b5c1abed99c9624d442daf35bb3b1\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.1.1] C:\Users\igr\.android\build-cache\d36917d7d6b82c4d28c90ffa020b335966dacaa6\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.1.1] C:\Users\igr\.android\build-cache\7c4fd3a5c743b12cb04ff229e1ff4dda682303d6\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.1.1] C:\Users\igr\.android\build-cache\912ebdb32db0c89d8f9d96a0003bd80171d9784e\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.1.1] C:\Users\igr\.android\build-cache\c6053a3e30bdcb6f26d8bba78a35560ab04c2a15\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.1.1] C:\Users\igr\.android\build-cache\7a144e60d573e9ef822472f6d48ddec94fc64e2e\output\AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.1.1] C:\Users\igr\.android\build-cache\28ee028416becd736d93583e501c1773945a85d5\output\AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:33:40-69
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:33:13-39
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+		INJECTED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml
+uses-feature#android.hardware.camera.any
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:35:3-61
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:35:17-59
+uses-feature#android.hardware.camera.autofocus
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:36:3-92
+	android:required
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:36:66-90
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:36:17-65
+uses-feature#android.hardware.camera.flash
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:37:3-88
+	android:required
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:37:62-86
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:37:17-61
+uses-feature#android.hardware.screen.landscape
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:38:3-67
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:38:17-65
+uses-feature#android.hardware.wifi
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:39:3-80
+	android:required
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:39:54-78
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:39:17-53
+application
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:41:3-142:17
+MERGED from [com.android.support:design:25.1.1] C:\Users\igr\.android\build-cache\28ee028416becd736d93583e501c1773945a85d5\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:25.1.1] C:\Users\igr\.android\build-cache\b3bfb59816cc7c3188c61258bde4ff79e0d5f48a\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] C:\Users\igr\.android\build-cache\6fdd7e871e9dec696988bb4600267ffed42e0451\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:25.1.1] C:\Users\igr\.android\build-cache\595d177e3347b6b35687116955510459e68e8352\output\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:transition:25.1.1] C:\Users\igr\.android\build-cache\61574c0fab69a12064d19dc4ef7c76043e625aaa\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:25.1.1] C:\Users\igr\.android\build-cache\1a510cfdf58b5c1abed99c9624d442daf35bb3b1\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.1.1] C:\Users\igr\.android\build-cache\d36917d7d6b82c4d28c90ffa020b335966dacaa6\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.1.1] C:\Users\igr\.android\build-cache\7c4fd3a5c743b12cb04ff229e1ff4dda682303d6\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.1.1] C:\Users\igr\.android\build-cache\912ebdb32db0c89d8f9d96a0003bd80171d9784e\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.1.1] C:\Users\igr\.android\build-cache\c6053a3e30bdcb6f26d8bba78a35560ab04c2a15\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.1.1] C:\Users\igr\.android\build-cache\7a144e60d573e9ef822472f6d48ddec94fc64e2e\output\AndroidManifest.xml:25:5-20
+	android:label
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:43:16-48
+	android:allowBackup
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:44:16-42
+	android:icon
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:41:16-54
+	android:logo
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:42:16-54
+activity#com.google.zxing.client.android.CaptureActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:45:5-89:16
+	android:clearTaskOnLaunch
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:47:15-47
+	android:screenOrientation
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:46:15-58
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:48:15-44
+	android:windowSoftInputMode
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:50:15-62
+	android:theme
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:49:15-50
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:45:15-46
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:52:7-55:23
+action#android.intent.action.MAIN
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:53:9-60
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:53:17-58
+category#android.intent.category.LAUNCHER
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:54:9-68
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:54:19-66
+intent-filter#android.intent.category.DEFAULT+com.google.zxing.client.android.SCAN
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:57:7-60:23
+action#com.google.zxing.client.android.SCAN
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:58:9-70
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:58:17-68
+category#android.intent.category.DEFAULT
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:59:9-67
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:59:19-65
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:62:7-67:23
+action#android.intent.action.VIEW
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:63:9-60
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:63:17-58
+category#android.intent.category.BROWSABLE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:65:9-69
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:65:19-67
+data
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:66:9-92
+	android:path
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:66:70-90
+	android:host
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:66:37-69
+	android:scheme
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:66:15-36
+activity#com.google.zxing.client.android.PreferencesActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:90:5-92:46
+	android:label
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:91:15-55
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:92:15-44
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:90:15-50
+activity#com.google.zxing.client.android.encode.EncodeActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:93:5-111:16
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:94:15-44
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:93:15-52
+intent-filter#android.intent.category.DEFAULT+com.google.zxing.client.android.ENCODE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:95:7-98:23
+action#com.google.zxing.client.android.ENCODE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:96:9-72
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:96:17-70
+intent-filter#android.intent.action.SEND+android.intent.category.DEFAULT
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:100:7-104:23
+action#android.intent.action.SEND
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:101:9-60
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:101:17-58
+activity#com.google.zxing.client.android.book.SearchBookContentsActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:112:5-120:16
+	android:screenOrientation
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:115:15-58
+	android:label
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:113:15-47
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:114:15-44
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:112:15-62
+intent-filter#android.intent.category.DEFAULT+com.google.zxing.client.android.SEARCH_BOOK_CONTENTS
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:116:7-119:23
+action#com.google.zxing.client.android.SEARCH_BOOK_CONTENTS
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:117:9-86
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:117:17-84
+activity#com.google.zxing.client.android.share.ShareActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:121:5-128:16
+	android:screenOrientation
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:123:15-47
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:122:15-44
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:121:15-50
+intent-filter#android.intent.category.DEFAULT+com.google.zxing.client.android.SHARE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:124:7-127:23
+action#com.google.zxing.client.android.SHARE
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:125:9-71
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:125:17-69
+activity#com.google.zxing.client.android.history.HistoryActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:129:5-131:46
+	android:label
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:130:15-52
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:131:15-44
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:129:15-54
+activity#com.google.zxing.client.android.share.BookmarkPickerActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:132:5-134:46
+	android:label
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:133:15-59
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:134:15-44
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:132:15-59
+activity#com.google.zxing.client.android.share.AppPickerActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:135:5-137:46
+	android:label
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:136:15-54
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:137:15-44
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:135:15-54
+activity#com.google.zxing.client.android.HelpActivity
+ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:138:5-141:46
+	android:screenOrientation
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:140:15-47
+	android:label
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:139:15-48
+	android:stateNotNeeded
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:141:15-44
+	android:name
+		ADDED from C:\Projects\igr\MyApplication\android\src\main\AndroidManifest.xml:138:15-43
