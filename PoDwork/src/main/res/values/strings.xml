@@ -35,14 +35,17 @@
     <string name="idsFilter">Search</string>
     <string name="idsEnterEmail">Enter your email address</string>
     <string name="idsDisonnect">disconnected</string>
-    <string name="idsScan">Load SSCC</string>
-    <string name="idsScanNext">Un-load SSCC</string>
-    <string name="idsContine">Scan another?</string>
-    <string name="idsCheckScan">Allow SSCC scan</string>
+    <string name="idsScan">Check in</string>
+    <string name="idsScanNext">Check out</string>
+    <string name="idsContine">Scan another container?</string>
+    <string name="idsCheckScan">Allow container code scan</string>
     <string name="idsRemoveScan">Remove item?</string>
 
     <string name="idsUncheckUnload">Checkmark is removed.\nScan another?</string>
+    <string name="idsErrorLoad">Barcode is exists\nScan another?</string>
     <string name="idsErrorUnload">Barcode is not found.\nScan another?</string>
+    <string name="idsEnterBarcode">Enter barcode manually</string>
+
 
     <string name="idsExtPdf">.pdf</string>
     <string name="idsExtPng">.png</string>
@@ -52,5 +55,8 @@
         <item>Remove Document</item>
         <item>Scan Shipping Container</item>
     </string-array>
-
+<!--
+    <string name="idsScan">Check in</string>
+    <string name="idsScanNext">Check out</string>
+-->
 </resources>

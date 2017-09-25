@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean mCheckAddUser;
     private boolean mCheckScan;
     // statics
-    static private List<ListRecEx> mLocalDataList = new ArrayList<ListRecEx>();
-    static private ArrayRecs mServerDataList = new ArrayRecs();
-    static private ArrayRecs mFilterDataList = new ArrayRecs();
+    static private ListViewEx.ArrayRecEx mLocalDataList = new ListViewEx.ArrayRecEx();
+    static private ListViewEx.ArrayRec mServerDataList = new ListViewEx.ArrayRec();
+    static private ListViewEx.ArrayRec mFilterDataList = new ListViewEx.ArrayRec();
     static private String mLoginName = null;
     static public String GetSignName(String sFileName) { return sFileName.replace(".pdf", ".png"); }
     static public String GetTextName(String sFileName) { return sFileName.replace(".pdf", ".txt"); }
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode != RESULT_OK) {
                     String sError = intent.getStringExtra(LOGIN_ERROR);
                     if (sError!=null && !sError.isEmpty() )
-                        errorDialog(sError);
+                        dialogError(sError);
                     break;
                 }
                 SetLogin();
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                         _lveLocalList.setItemChecked(mSelectPos, false);
                     } else {
                         if ( intent != null ) {
-                            ListRecEx lLocalData = mLocalDataList.get(mSelectPos);
+                            ListViewEx.RecEx lLocalData = mLocalDataList.get(mSelectPos);
                             lLocalData.mUserData = intent.getStringExtra(MainActivity.PDF_USERDATA);
                             lLocalData.mIsSigned = true;
                             writeUserData(lLocalData.mFile, lLocalData.mUserData, lLocalData.mScanList);
@@ -218,9 +218,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 if ( mSelectPos<0 || mSelectPos>=mLocalDataList.size() )
                     break;
-                ListRecEx lLocalData = mLocalDataList.get(mSelectPos);
+                ListViewEx.RecEx lLocalData = mLocalDataList.get(mSelectPos);
                 if ( lLocalData.mScanList==null)
-                    lLocalData.mScanList = new ArrayRecs();
+                    lLocalData.mScanList = new ListViewEx.ArrayRec();
                 lLocalData.mScanList.fromStringArrayList(intent.getStringArrayListExtra(MainActivity.SCAN_DATA));
                 writeUserData(lLocalData.mFile, lLocalData.mUserData, lLocalData.mScanList);
                 mSelectPos = -1;
@@ -232,11 +232,11 @@ public class MainActivity extends AppCompatActivity {
         String sUrl = mHostName + "/getlist.php";
         List<String> lListUrl = mPfdWork.getList(sUrl, mHandler);
 
-        ClearServerList(-1);
-        ClearFilterList(-1);
+        removeItemServer(-1);
+        removeItemFilter(-1);
         for (int i = 0; i < lListUrl.size(); i++) {
             File lFile = new File(lListUrl.get(i));
-            ListRecEx lServerData = new ListRecEx(lFile);
+            ListViewEx.RecEx lServerData = new ListViewEx.RecEx(lFile);
             mServerDataList.add(lServerData);
 //            _lveFilterList.AddItem(lFile, false);
             AddFilterList(lServerData);
@@ -244,57 +244,60 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onLoad(View view) {
         String sFileNameTmp = String.format("temp%d.pdf", _lveLocalList.getCount());
+        ListViewEx.Rec lRec;
         for (int i = mFilterDataList.size()-1; i>=0 ; i--) {
-            ListRec lFilterData = mFilterDataList.get(i);
-            if ( !lFilterData.mIsSigned )
+            lRec = mFilterDataList.get(i);
+            if ( !lRec.mIsSigned )
                 continue;
-
-            String sUrl = String.format("%s/%s", mHostName, lFilterData.mFile);
+            String sUrl = String.format("%s/%s", mHostName, lRec.mFile);
             File lFile = mPfdWork.downloadFile(sUrl, mDataPath.getAbsolutePath(), sFileNameTmp, mHandler);
-            if (lFile != null) {
-                _lveFilterList.RemItem(lFilterData.mFile);
-                mFilterDataList.remove(i);
-                RemoveFromServerList(lFilterData);
+            if (lFile == null)
+                continue;
+            removeItemFilter(i);
+            removeItemServer(lRec);
 
-                String sSignName = GetSignName(lFile.getAbsolutePath());
-                boolean mIsSigned = new File(sSignName).exists();
-                if ( _lveLocalList.AddItem(lFile, mIsSigned) ) {
-                    ListRecEx lLocalData = new ListRecEx(lFile);
-                    mLocalDataList.add(lLocalData);
-                }
-            }
+            int position = _lveLocalList.getPositionFromFile(lFile);
+            if ( position >= 0 )
+                continue;
+            boolean mIsSigned = new File(GetSignName(lFile.getAbsolutePath())).exists();
+            _lveLocalList.AddItem(lFile, mIsSigned);
+            ListViewEx.RecEx lLocalData = new ListViewEx.RecEx(lFile);
+            mLocalDataList.add(lLocalData);
         }
     }
     public void UploadData(String sMailTo)
     {
         String sUrl = mHostName + "/upload.php";
         Integer nResponceCode;
+        ListViewEx.RecEx lRecEx;
         for (int i = mLocalDataList.size()-1; i>=0; i--) {
-            if (!_lveLocalList.isItemChecked(i))
+            lRecEx = mLocalDataList.get(i);
+//            if (!_lveLocalList.isItemChecked(i))
+            if ( !lRecEx.mIsSigned )
                 continue;
-            File lFile = mLocalDataList.get(i).mFile;
-            String sFileName = lFile.getAbsolutePath();
-            String sUsedData = mLocalDataList.get(i).mUserData;
+            String sFileName = lRecEx.mFile.getAbsolutePath();
             nResponceCode = mPfdWork.uploadFile(sUrl, sFileName, null, null, mHandler);
             if (nResponceCode == HttpURLConnection.HTTP_OK) {
+                lRecEx.mFile.delete();
+                _lveLocalList.RemItem(i);
                 mLocalDataList.remove(i);
-                _lveLocalList.RemItem(lFile);
-                lFile.delete();
-            } else
-                continue;
+            }
+//            else continue;
+
             String sSignName = GetSignName(sFileName);
+            String sUsedData = lRecEx.mUserData;
             nResponceCode = mPfdWork.uploadFile(sUrl, sSignName, sUsedData, sMailTo,  mHandler);
             if (nResponceCode == HttpURLConnection.HTTP_OK) {
                 new File(sSignName).delete();
-            } else
-                continue;
+            }
+//            else continue;
 
             String sTextName = GetTextName(sFileName);
             nResponceCode = mPfdWork.uploadFile(sUrl, sTextName, null, null, mHandler);
             if (nResponceCode == HttpURLConnection.HTTP_OK) {
                 new File(sTextName).delete();
-            } else
-                continue;
+            }
+//            else continue;
 //            deleteUserData(lFile);
         }
     }
@@ -302,18 +305,11 @@ public class MainActivity extends AppCompatActivity {
         UploadData(null);
     }
     public void onMailto(View view) {
-        selectEmailDialog();
+        dialogSelectEmail();
     }
     public void onClear(View view) {
-        ClearServerList(-1);
-        ClearFilterList(-1);
-// for debug
-/*
-        if ( IsFirst() ) {
-            Intent intent = new Intent(MainActivity.this, BarcodesActivity.class);
-            startActivityForResult(intent, CODE_SCAN);
-        }
-*/
+        removeItemServer(-1);
+        removeItemFilter(-1);
     }
 
     // Initialize
@@ -331,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
         _lveLocalList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListRecEx lLocalData = mLocalDataList.get(position);
+                ListViewEx.RecEx lLocalData = mLocalDataList.get(position);
                 mSignViewOnly = lLocalData.mIsSigned;
                 Intent intent = new Intent(MainActivity.this, PdfViewActivity.class);
                 String sFileName = lLocalData.mFile.getAbsolutePath();
@@ -351,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
                 if ( mCheckScan ) {
                     if (_lveLocalList.isItemChecked(mSelectPos)) {
                         Intent intent = new Intent(MainActivity.this, BarcodesActivity.class);
-                        ListRecEx lLocalData = mLocalDataList.get(mSelectPos);
+                        ListViewEx.RecEx lLocalData = mLocalDataList.get(mSelectPos);
                         intent.putExtra(MainActivity.PDF_FILENAME, lLocalData.mFile.getName());
                         if (lLocalData.mScanList != null)
                             intent.putStringArrayListExtra(MainActivity.SCAN_DATA, lLocalData.mScanList.toStringArrayList());
@@ -359,7 +355,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         final View finalView = view;
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
-//                            .setTitle(mLocalDataList.get(mSelectPos).mFile.getName())
                                 .setItems(R.array.local_array, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -367,11 +362,11 @@ public class MainActivity extends AppCompatActivity {
                                             case 0: // remove
                                                 if (_lveLocalList.isItemChecked(mSelectPos))
                                                     return;
-                                                removeItemDialog(mSelectPos, finalView);
+                                                dialogRemoveItem(mSelectPos, finalView);
                                                 break;
                                             case 1: // scan
                                                 Intent intent = new Intent(MainActivity.this, BarcodesActivity.class);
-                                                ListRecEx lLocalData = mLocalDataList.get(mSelectPos);
+                                                ListViewEx.RecEx lLocalData = mLocalDataList.get(mSelectPos);
                                                 intent.putExtra(MainActivity.PDF_FILENAME, lLocalData.mFile.getName());
                                                 if (lLocalData.mScanList != null)
                                                     intent.putStringArrayListExtra(MainActivity.SCAN_DATA, lLocalData.mScanList.toStringArrayList());
@@ -386,7 +381,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     if (_lveLocalList.isItemChecked(position))
                         return false;
-                    removeItemDialog(position, view);
+                    dialogRemoveItem(position, view);
                 }
                 return true;
             }
@@ -403,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
              @Override
              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                  if (position>=0 && position<mServerDataList.size()) {
-                     ListRec lServerData = mFilterDataList.get(position);
+                     ListViewEx.Rec lServerData = mFilterDataList.get(position);
                      lServerData.mIsSigned = _lveFilterList.isItemChecked(position);
                  }
              }
@@ -433,7 +428,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean accept(File file, String fileName) { return fileName.matches(".*\\.txt"); }
         };
-
 //        _etFilter.clearFocus();
 //        _etFilter.setFocusableInTouchMode(false);
 //        _btnClear.requestFocus();
@@ -446,8 +440,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private void SetLogout() {
         mLoginName = null;
-        ClearServerList(-1);
-        ClearFilterList(-1);
+        removeItemServer(-1);
+        removeItemFilter(-1);
         OutTitle();
     }
     private void OutTitle()
@@ -464,7 +458,7 @@ public class MainActivity extends AppCompatActivity {
         if ( _miLogout != null )
             _miLogout.setEnabled(!bIsFirst);
     }
-    private String readUserData(File lFilePdf, ArrayRecs lScanList)
+    private String readUserData(File lFilePdf, ListViewEx.ArrayRec lScanList)
     {
         File lFileTxt = new File(GetTextName(lFilePdf.getAbsolutePath()));
         if ( !lFileTxt.exists() )
@@ -479,9 +473,9 @@ public class MainActivity extends AppCompatActivity {
                 if ( nCountLine++ == 0 ) {
                     sUserData = new String(sLine);
                 } else {
-                    ListRec lListRec = new ListRec();
-                    lListRec.fromString(sLine);
-                    lScanList.add(lListRec);
+                    ListViewEx.Rec lRec = new ListViewEx.Rec();
+                    lRec.fromString(sLine);
+                    lScanList.add(lRec);
                 }
             }
             br.close();
@@ -490,7 +484,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return sUserData;
     }
-    private void writeUserData(File lFilePdf, String sUserData, ArrayRecs lScanList)
+    private void writeUserData(File lFilePdf, String sUserData, ListViewEx.ArrayRec lScanList)
     {
         File lFileTxt = new File(GetTextName(lFilePdf.getAbsolutePath()));
         try {
@@ -502,8 +496,8 @@ public class MainActivity extends AppCompatActivity {
             else
                 fw.println();
             if ( lScanList!= null )
-                for (ListRec lListRec : lScanList)
-                    fw.println( lListRec.toString() );
+                for (ListViewEx.Rec lRec : lScanList)
+                    fw.println( lRec.toString() );
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -529,36 +523,35 @@ public class MainActivity extends AppCompatActivity {
                     mIsSigned = new File(GetSignName(lFile.getAbsolutePath())).exists();
                     _lveLocalList.AddItem(lFile, mIsSigned);
 
-                    ArrayRecs lScanList = new ArrayRecs();
+                    ListViewEx.ArrayRec lScanList = new ListViewEx.ArrayRec();
                     String sUserData = readUserData(lFile, lScanList);
-                    ListRecEx lLocalData = new ListRecEx(lFile, mIsSigned, sUserData, lScanList);
+                    ListViewEx.RecEx lLocalData = new ListViewEx.RecEx(lFile, mIsSigned, sUserData, lScanList);
                     mLocalDataList.add(lLocalData);
                 }
             }
-            ClearServerList(-1);
-            ClearFilterList(-1);
+            removeItemServer(-1);
+            removeItemFilter(-1);
         } else {
             for (int i = 0; i < mLocalDataList.size(); i++) {
-                ListRecEx lLocalData = mLocalDataList.get(i);
-                _lveLocalList.AddItem(lLocalData.mFile, lLocalData.mIsSigned);
+                ListViewEx.RecEx lLocalData = mLocalDataList.get(i);
+                _lveLocalList.AddItem(lLocalData);
             }
 
             for (int i = 0; i < mFilterDataList.size(); i++) {
-                ListRec lFilterData = mFilterDataList.get(i);
-                _lveFilterList.AddItem(lFilterData.mFile, lFilterData.mIsSigned);
+                ListViewEx.Rec lRec = mFilterDataList.get(i);
+                _lveFilterList.AddItem(lRec);
             }
         }
     }
     private void FillFilterList()
     {
-        ClearFilterList(-1);
+        removeItemFilter(-1);
         for (int i = 0; i < mServerDataList.size(); i++) {
-            ListRec lServerData = mServerDataList.get(i);
-//            _lveFilterList.AddItem(lFile, false);
+            ListViewEx.Rec lServerData = mServerDataList.get(i);
             AddFilterList(lServerData);
         }
     }
-    private void AddFilterList(ListRec lServerData)
+    private void AddFilterList(ListViewEx.Rec lServerData)
     {
         if ( mFilter!=null )
         {
@@ -568,50 +561,46 @@ public class MainActivity extends AppCompatActivity {
                 return;
         }
         mFilterDataList.add(lServerData);
-        _lveFilterList.AddItem(lServerData.mFile, lServerData.mIsSigned);
+        _lveFilterList.AddItem(lServerData);
     }
-    private void RemoveFromServerList(ListRec lFilterData)
+    private void removeItemServer(ListViewEx.Rec lRec)
     {
-        lFilterData.mIsSigned = true;
-        int position = mServerDataList.indexOf(lFilterData);
+        lRec.mIsSigned = true;
+        int position = mServerDataList.indexOf(lRec);
         if ( position<0 )
             return;
         mServerDataList.remove(position);
     }
-    private void ClearServerList(int position) {
+    private void removeItemServer(int position) {
         if ( position<0 ) {
-//            _lveFilterList.RemItem(null);
             mServerDataList.clear();
         } else {
-            ListRec lServerData = mServerDataList.get(position);
             mServerDataList.remove(position);
-//          _lveFilterList.RemItem(lServerData.mFile);
         }
     }
-    private void ClearFilterList(int position) {
+    private void removeItemFilter(int position) {
         if ( position<0 ) {
-            _lveFilterList.RemItem(null);
+            _lveFilterList.RemItem(position);
             mFilterDataList.clear();
         } else {
-            ListRec lServerData = mFilterDataList.get(position);
+            _lveFilterList.RemItem(position);
             mFilterDataList.remove(position);
-            _lveFilterList.RemItem(lServerData.mFile);
         }
     }
     private void removeItem(int position) {
         if ( position<0 ) {
-            _lveLocalList.RemItem(null);
+            _lveLocalList.RemItem(position);
             mLocalDataList.clear();
         } else {
-            ListRecEx lLocalData = mLocalDataList.get(position);
-            if (lLocalData.mIsSigned)
+            ListViewEx.RecEx lRecEx = mLocalDataList.get(position);
+            if (lRecEx.mIsSigned)
                 return;
-            _lveLocalList.RemItem(lLocalData.mFile);
-            lLocalData.mFile.delete();
+            lRecEx.mFile.delete();
+            _lveLocalList.RemItem(position);
             mLocalDataList.remove(position);
         }
     }
-    private void removeItemDialog(int position, View view) {
+    private void dialogRemoveItem(int position, View view) {
 //        mSelectPos = position;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getResources().getString(R.string.idsRemoveItem))
@@ -629,7 +618,7 @@ public class MainActivity extends AppCompatActivity {
 //        builder.create().show();
         showDialogAfterItem(builder, view);
     }
-    private void errorDialog(String sError) {
+    private void dialogError(String sError) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(sError)
                 .setPositiveButton(getResources().getString(R.string.idsOK), new DialogInterface.OnClickListener() {
@@ -638,7 +627,7 @@ public class MainActivity extends AppCompatActivity {
                 });
         builder.create().show();
     }
-    private void selectEmailDialog() {
+    private void dialogSelectEmail() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogTheme);
         builder.setTitle(getResources().getString(R.string.idsEnterEmail));
         LinearLayout _llDialogMail = (LinearLayout)getLayoutInflater().inflate(R.layout.dialog_mail, null);
@@ -707,7 +696,7 @@ public class MainActivity extends AppCompatActivity {
                     if (msg.obj == null)
                         break;
                     Exception lException = (Exception) msg.obj;
-                    errorDialog(lException.toString());
+                    dialogError(lException.toString());
 //                    Toast.makeText(MainActivity.this, lException.toString(), Toast.LENGTH_LONG).show();
                     break;
                 case MSG_DOWNLOAD:
@@ -753,6 +742,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ListRec class
+/*
     public static class ListRec {
         // Constants
         public final static String mSep = " ";
@@ -778,11 +768,6 @@ public class MainActivity extends AppCompatActivity {
         public String toString()
         {
             return String.format("%s%s%d", mFile.getName(), mSep, (mIsSigned)?1:0);
-/*
-            StringBuilder builder = new StringBuilder();
-            builder.append(String.format("%s%s%d", mFile.getName(), mSep, (mIsSigned)?1:0) );
-            return builder.toString();
-*/
         }
     }
     public static class ArrayRecs extends ArrayList<ListRec> {
@@ -800,9 +785,9 @@ public class MainActivity extends AppCompatActivity {
                 return;
             int n = aStringList.size();
             for (int i = 0; i < n; i++) {
-                ListRec lListRec = new ListRec();
-                lListRec.fromString(aStringList.get(i));
-                this.add(lListRec);
+                ListRec lRec = new ListRec();
+                lRec.fromString(aStringList.get(i));
+                this.add(lRec);
             }
         }
     }
@@ -828,6 +813,7 @@ public class MainActivity extends AppCompatActivity {
             mUserData = lUserData; mScanList = lScanList;
         }
     }
+*/
 }
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.idFab);
