@@ -36,12 +36,12 @@
         "source": "C:\\Users\\igr\\.android\\build-cache\\b3bfb59816cc7c3188c61258bde4ff79e0d5f48a\\output\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
-        "merged": "C:\\Projects\\igr\\MyApplication\\zxing\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png",
-        "source": "C:\\Users\\igr\\.android\\build-cache\\b3bfb59816cc7c3188c61258bde4ff79e0d5f48a\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png"
-    },
-    {
         "merged": "C:\\Projects\\igr\\MyApplication\\zxing\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png",
         "source": "C:\\Users\\igr\\.android\\build-cache\\b3bfb59816cc7c3188c61258bde4ff79e0d5f48a\\output\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "C:\\Projects\\igr\\MyApplication\\zxing\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png",
+        "source": "C:\\Users\\igr\\.android\\build-cache\\b3bfb59816cc7c3188c61258bde4ff79e0d5f48a\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
         "merged": "C:\\Projects\\igr\\MyApplication\\zxing\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
