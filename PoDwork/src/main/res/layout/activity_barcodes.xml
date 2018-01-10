@@ -8,7 +8,6 @@ android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 android:paddingBottom="@dimen/activity_vertical_margin"
 tools:context="com.igr.pod.work.BarcodesActivity">
-
     <TextView
         android:id="@+id/idBarcodeTitle"
         android:layout_width="match_parent"
@@ -24,50 +23,51 @@ tools:context="com.igr.pod.work.BarcodesActivity">
         android:background="@android:drawable/editbox_dropdown_light_frame"
         tools:listitem="@android:layout/simple_list_item_checked"
         />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/idBtnScan"
+            android:id="@+id/idCancel"
             style="@android:style/Widget.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onScan"
+            android:layout_gravity="left"
             android:background="@android:drawable/btn_default_small"
-            android:text="@string/idsScan" />
-        <Button
-            android:id="@+id/idBtnScanNext"
-            style="@android:style/Widget.Button.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onScanNext"
-            android:background="@android:drawable/btn_default_small"
-            android:text="@string/idsScanNext" />
+            android:onClick="onCancel"
+            android:text="@android:string/cancel" />
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/idOk"
+                android:id="@+id/idBtnScan"
                 style="@android:style/Widget.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onOk"
+                android:onClick="onScan"
                 android:background="@android:drawable/btn_default_small"
-                android:text="@android:string/ok" />
+                android:text="@string/idsScan" />
             <Button
-                android:id="@+id/idCancel"
+                android:id="@+id/idBtnScanNext"
                 style="@android:style/Widget.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onCancel"
+                android:onClick="onScanNext"
                 android:background="@android:drawable/btn_default_small"
-                android:text="@android:string/cancel" />
-        </LinearLayout>
+                android:text="@string/idsScanNext" />
+            </LinearLayout>
+        <Button
+            android:id="@+id/idOk"
+            style="@android:style/Widget.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@android:drawable/btn_default_small"
+            android:onClick="onOk"
+            android:text="@android:string/ok" />
     </LinearLayout>
 </LinearLayout>
-<!--         android:weightSum="9" -->
